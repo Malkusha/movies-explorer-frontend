@@ -37,20 +37,29 @@
 }
 
 .profile__button {
+  margin: 206px 0 16px;
   background-color: transparent;
   border: none;
   font-size: 13px;
-}
-
-.profile__button_save {
-  margin: 206px 0 16px;
   color: #fff;
   font-weight: 400;
 }
 
-.profile__button_logout {
+.profile__button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.profile__logout {
+  font-size: 13px;
+  text-decoration: none;
+  text-align: center;
   color: #EE3465;
   font-weight: 500;
+} 
+
+.profile__button_save {
+  
 }
 
 @media screen and (max-width: 768px) {
@@ -62,7 +71,7 @@
     margin-top: 80px;
   }
 
-  .profile__button_save {
+  .profile__button {
     margin-top: 200px;
   }
 }
@@ -77,11 +86,11 @@
     margin-top: 65px;
   }
 
-  .profile__button_save {
+  .profile__button {
     margin-top: 366px;
   }
 
-  .profile__button {
+  .profile__button, .profile__logout {
     font-size: 12px;
   }
 }

@@ -20,7 +20,7 @@ function MoviesCard({movie, isSaved, onClick}) {
         </>) :
         (<button className='movie__button movie__button_type_save' onClick={onClick}>Сохранить</button>)}
       <div className='movie__info'>
-        <p className='movie__title'>{movie.nameRu}</p>
+        <h2 className='movie__title'>{movie.nameRu}</h2>
         <p className='movie__time'>{convertDuration(movie.duration)}</p>
       </div>
     </li>

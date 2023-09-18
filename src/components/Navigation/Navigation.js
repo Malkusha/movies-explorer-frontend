@@ -9,14 +9,15 @@ function Navigation({onClose}) {
       <button
         className='nav__button'
         onClick={onClose}
+        type='button'
       />
       <nav className='nav__menu-container'>
-        <ul className='nav__menu menu'>
+        <ul className='nav__menu header__menu'>
           <li>
               <NavLink 
                 className={(navData) => navData.isActive ? 
-                  "nav__link menu__link nav__link_active" :
-                  "nav__link menu__link"}
+                  "nav__link header__link nav__link_active" :
+                  "nav__link header__link"}
                 to="/" 
                 onClick={onClose}>Главная
             </NavLink>
@@ -24,8 +25,8 @@ function Navigation({onClose}) {
           <li>
             <NavLink 
               className={(navData) => navData.isActive ? 
-                "nav__link menu__link nav__link_active" :
-                "nav__link menu__link"}
+                "nav__link header__link nav__link_active" :
+                "nav__link header__link"}
               to="/movies" 
               onClick={onClose}>Фильмы
             </NavLink>
@@ -33,15 +34,15 @@ function Navigation({onClose}) {
           <li>
             <NavLink 
               className={(navData) => navData.isActive ? 
-                "nav__link menu__link nav__link_active" :
-                "nav__link menu__link"}
+                "nav__link header__link nav__link_active" :
+                "nav__link header__link"}
               to="/saved-movies" 
               onClick={onClose}>Сохранённые фильмы
             </NavLink>
           </li>
         </ul>
         <Link 
-          className='nav__link menu__link nav__link_account' 
+          className='nav__link header__link nav__link_account' 
           to="/profile" 
           onClick={onClose}>Аккаунт
         </Link>

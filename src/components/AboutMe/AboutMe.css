@@ -56,7 +56,7 @@
 
 @media screen and (max-width: 768px) {
   .about-me {
-    margin: 41px 50px 89px;
+    margin: 81px 50px 89px;
   }
 
   .about-me__info {
@@ -101,9 +101,7 @@
 @media screen and (max-width: 480px) {
 
   .about-me {
-    margin-left: 14px;
-    margin-right: 14px;
-    margin-bottom: 75px;
+    margin: 41px 14px 75px;
   }  
 
   .about-me__title {

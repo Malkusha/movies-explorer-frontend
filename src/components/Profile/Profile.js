@@ -1,9 +1,10 @@
 import './Profile.css';
 
 function Profile() {
+
   return(
-    <section className='profile'>
-      <h3 className='profile__title'>Привет, Анастасия!</h3>
+    <main className='profile'>
+      <h1 className='profile__title'>Привет, Анастасия!</h1>
       <form className='profile__form'>
           <input 
             className='profile__input profile__input_name' 
@@ -22,12 +23,12 @@ function Profile() {
             required
           />
         <button 
-          className='profile__button profile__button_save'
+          className='profile__button'
           type='submit'>Редактировать
         </button>
-        <button className='profile__button profile__button_logout'>Выйти из аккаунта</button>
+        <a className='profile__logout' href="/">Выйти из аккаунта</a>
       </form>
-    </section>
+    </main>
   )
 }
 

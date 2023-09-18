@@ -7,6 +7,7 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import Footer from '../Footer/Footer';
@@ -18,14 +19,31 @@ function App() {
   const location = useLocation();
 
   const [currentUser, setCurrentUser] = useState({});
-  
+  const [isLoggedin, setIsLoggedin] = useState(false);
+
+  function setHeader() {
+    if ( location.pathname === "/" ) {
+      setIsLoggedin(false);
+    }
+    else {
+      setIsLoggedin(true)
+    }
+  }
+
+  useEffect(() => {
+    setHeader();
+  })
+
   return (
   <CurrentUserContext.Provider value={currentUser}>
     <div className='page'>
       {(location.pathname === "/" || 
           location.pathname === "/movies" || 
           location.pathname === "/saved-movies" ||
-          location.pathname === "/profile") && <Header/>}
+          location.pathname === "/profile") && 
+          <Header
+            isLoggedin={isLoggedin}
+          />}
         <Routes>
           <Route
             path="/"
@@ -37,7 +55,7 @@ function App() {
           />
           <Route 
           path="/saved-movies"
-          element={<Movies/>}
+          element={<SavedMovies/>}
           />
           <Route 
               path="/signup" 

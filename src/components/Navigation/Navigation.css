@@ -21,7 +21,12 @@
     background-size: cover;
     border: none;
     padding: 0;
-  } 
+  }
+
+  .nav__button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
 
   .nav__menu-container, .nav__menu {
     display: flex;

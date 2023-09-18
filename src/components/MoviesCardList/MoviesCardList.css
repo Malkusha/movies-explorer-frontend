@@ -49,7 +49,9 @@
   .movies {
     margin-left: 10px;
     margin-right: 10px;
+    margin-bottom: 50px;
     padding-top: 52px;
+    gap: 62px;
   }
   .movies__list {
     grid-template-columns: repeat(auto-fill, 300px);

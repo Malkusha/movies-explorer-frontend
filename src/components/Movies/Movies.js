@@ -5,12 +5,12 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function Movies({isLoading}) {
   return (
-    <section>
+    <main>
       <SearchForm />
       { isLoading ? 
         <Preloader /> :
         <MoviesCardList />}
-    </section>
+    </main>
   )
 }
 

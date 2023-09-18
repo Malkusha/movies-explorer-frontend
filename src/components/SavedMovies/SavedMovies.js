@@ -3,14 +3,14 @@ import Preloader from '../Preloader/Preloader';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-function SavedMovies() {
+function SavedMovies({isLoading}) {
   return (
-    <section>
+    <main>
       <SearchForm />
       { isLoading ? 
         <Preloader /> :
         <MoviesCardList />}
-    </section>
+    </main>
   )
 }
 

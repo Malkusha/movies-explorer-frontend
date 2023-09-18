@@ -29,7 +29,7 @@ function MoviesCardList() {
   }
 
   return(
-    <div className='movies'>
+    <section className='movies'>
       <ul className='movies__list'>
         {initialMovies.slice(0, MoviesOnPage).map((movie) => (
           <MoviesCard
@@ -39,8 +39,8 @@ function MoviesCardList() {
           />
         ))}
       </ul>
-      <button className='movies__add-button' >Ещё</button>
-    </div>
+      <button className='movies__add-button' type='button'>Ещё</button>
+    </section>
   )
 }
 export default MoviesCardList;

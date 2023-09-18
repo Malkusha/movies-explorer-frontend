@@ -106,7 +106,7 @@
 @media screen and (max-width: 767px) {
   .movie {
     width: 300px;
-    gap: 14px;
+    gap: 12px;
   }
 
   .movie__image {

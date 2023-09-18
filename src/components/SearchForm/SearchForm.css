@@ -10,7 +10,8 @@
 .search-form {
   display: grid;
   grid-template-columns: 1fr 44px;
-  gap: 10px;
+  column-gap: 10px;
+  row-gap: 46px;
 }
 
 .search-form__input {
@@ -51,8 +52,8 @@
 
 @media screen and (max-width: 480px) {
   .search {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 14px;
+    margin-right: 14px;
     gap: 45px;
   }
 

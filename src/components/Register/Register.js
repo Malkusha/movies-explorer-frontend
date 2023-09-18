@@ -4,7 +4,7 @@ import Login from '../Login/Login';
 function Register({title}) {
 
   return (
-    <section>
+    <main>
       <Login 
         title='Добро пожаловать!'
         link='/signin'
@@ -15,6 +15,7 @@ function Register({title}) {
         <label className='auth__reg-label'>Имя</label>
         <input
           className='auth__reg-input'
+          placeholder='Имя'
           name='name'
           type='text'
           minLength="2"
@@ -22,7 +23,7 @@ function Register({title}) {
           required
         />
       </Login>
-    </section>
+    </main>
   )
 }
 
