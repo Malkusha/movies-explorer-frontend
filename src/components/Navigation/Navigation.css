@@ -1,0 +1,76 @@
+@media screen and (max-width: 768px) {
+  .nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    min-width: 520px;
+    max-width: 520px;
+    height: 100vh;
+    background: #202020;
+  }
+
+  .nav__button {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    background-color: #202020;
+    background-image: url(../../images/close.svg);
+    background-size: cover;
+    border: none;
+    padding: 0;
+  } 
+
+  .nav__menu-container, .nav__menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 610px;
+    align-items: center;
+  }
+
+  .nav__menu-container {
+    height: 100%;
+  }
+
+  .nav__menu {
+    gap: 28px;
+    margin-top: 159px;
+  }
+
+  .nav__link {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .nav__link_active {
+    padding-bottom: 5px;
+    border-bottom: #fff solid 2px;
+  }
+
+  .nav__link_account {
+    margin-bottom: 107px;
+    align-self: center;
+    padding: 8px 20px;
+    background-color: #313131;
+    border-radius: 20px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .nav {
+    min-width: 100%;
+  }
+
+  .nav__menu-container {
+    justify-content: start;
+    gap: 425px;
+  }
+
+  .nav__menu {
+    margin-top: 144px;
+  }
+}
