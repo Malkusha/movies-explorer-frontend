@@ -28,8 +28,7 @@ function Movies({onMovieDelete, onMovieSave, savedMovies}) {
     localStorage.setItem('movies', JSON.stringify(moviesList));
     setInitialMovies(moviesList);
     isShort ? setFilteredMovies(filterShortMovies(moviesList))
-      : setFilteredMovies(moviesList)
-    
+      : setFilteredMovies(moviesList)  
   }
 
   function handleShortMovies() {

@@ -8,6 +8,10 @@ JSX, React, CSS
 
 npm start
 
+## Сcылка на pull rquest
+
+https://github.com/Malkusha/movies-explorer-frontend/pull/2
+
 ## Ссылка на репозиторий
 
 https://github.com/Malkusha/movies-explorer-frontend

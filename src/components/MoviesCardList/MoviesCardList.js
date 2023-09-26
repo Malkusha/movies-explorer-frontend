@@ -97,12 +97,7 @@ function MoviesCardList({
             ))}
           </ul>
             </>)
-            
-          
           }
-
-
-          
           { movies.length > 5 &&
             moviesOnPage < movies.length && (
               <button className='movies__add-button' type='button' onClick={handleShowMore}>Ещё</button>
