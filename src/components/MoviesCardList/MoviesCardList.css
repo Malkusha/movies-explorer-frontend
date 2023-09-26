@@ -6,6 +6,11 @@
   gap: 78px;
 }
 
+.movies__not-found {
+  text-align: center;
+  font-size: 18px;
+}
+
 .movies__list {
   padding: 0;
   margin: 0;

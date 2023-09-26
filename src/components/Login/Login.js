@@ -1,52 +1,37 @@
-import {Link} from 'react-router-dom';
+import LoginForm from '../LoginForm/LoginForm';
 import './Login.css';
-import Logo from '../Logo/Logo';
+import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function Login ({
-  title,
-  children,
-  link,
-  redirectText,
-  buttonText,
-  linkText
-}) {
+function Login ({onLogin, requestError, errorText}) {
 
-  let isDisabled = false;
+  const {
+    formValue,
+    error,
+    isValid,
+    handleChange} = useFormAndValidation();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onLogin(formValue);
+  }
 
   return(
-  <section className='auth'>
-    <div  className='auth__logo'>
-      <Logo/>
-    </div>
-    <h1 className='auth__title'>{title}</h1>
-    <form className='auth__form' id='auth-form'>
-      {children}
-      <label className='auth__label'>E-mail</label>
-      <input
-          className='auth__input'
-          placeholder='E-mail'
-          name='email'
-          type='email'
-          required
+    <main>
+      <LoginForm
+        title='Рады видеть!'
+        link='/signup'
+        redirectText='Ещё не зарегистрированы? '
+        buttonText='Войти'
+        linkText='Регистрация'
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+        formValue={formValue}
+        isDisabled={!isValid}
+        error={error}
+        requestError={requestError}
+        errorText={errorText}
       />
-      <label className='auth__label'>Пароль</label>
-      <input 
-          className='auth__input'
-          placeholder='Пароль'
-          name='password'
-          type='password'
-          minLength="2"
-				  maxLength="40"
-          required
-        />
-    </form>
-    <button 
-      className={`auth__submit ${isDisabled ? `auth__submit_disabled` : ``}`} 
-      form='auth-form'
-      type='submit'
-    >{buttonText}</button>
-    <span className='auth__redirect'>{redirectText}<Link className='auth__reg-link' to={link}>{linkText}</Link></span>
-  </section>
+    </main>
   )
 }
 

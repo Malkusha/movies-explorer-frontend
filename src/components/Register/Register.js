@@ -1,16 +1,36 @@
 import './Register.css';
-import Login from '../Login/Login';
+import LoginForm from '../LoginForm/LoginForm';
 
-function Register({title}) {
+import useFormAndValidation from '../../hooks/useFormAndValidation';
+
+function Register({onRegister, requestError, errorText}) {
+
+  const {
+    formValue,
+    error,
+    isValid,
+    handleChange} = useFormAndValidation();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onRegister(formValue);
+  }
 
   return (
     <main>
-      <Login 
+      <LoginForm 
         title='Добро пожаловать!'
         link='/signin'
         buttonText='Зарегистрироваться'
         redirectText='Уже зарегистрированы? '
         linkText='Войти'
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+        formValue={formValue}
+        error={error}
+        isDisabled={!isValid}
+        requestError={requestError}
+        errorText={errorText}
       >
         <label className='auth__reg-label'>Имя</label>
         <input
@@ -20,9 +40,13 @@ function Register({title}) {
           type='text'
           minLength="2"
           maxLength="40"
+          value={formValue.name || ''}
           required
+          onChange={handleChange}
         />
-      </Login>
+        <span className={!isValid ? 'auth__error auth__error_active'
+          : 'form__error'}>{error.name}</span>
+      </LoginForm>
     </main>
   )
 }

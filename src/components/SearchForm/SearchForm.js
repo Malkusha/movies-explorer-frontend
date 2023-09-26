@@ -1,21 +1,60 @@
+import { useEffect, useState } from 'react';
 import './SearchForm.css';
 import FilterCheckBox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm() {
+
+function SearchForm({
+  onSearchMovies, 
+  isShortMovies, 
+  onFilter, 
+  queryText,
+}) {
+
+  const [error, setError] = useState(false);
+  const [searchText, setSearchText] = useState('');
+
+  function handleChangeSearchText(e) {
+    setSearchText(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (searchText) {
+      setError(false);
+      onSearchMovies(searchText);
+    } else
+      {setError(true);}
+    setSearchText(searchText);
+  }
+
+  useEffect(() => {
+    setSearchText(queryText);
+  }, [])
+
   return (
     <section className='search'>
-      <form className='search-form'>
+      <form className='search-form'
+        onSubmit={handleSubmit}
+        >
           <input 
             className='search-form__input'
             placeholder='Фильм'
-            required
+            onChange={handleChangeSearchText}
+            value={searchText}
+            type='text'
+            id='search'
+            name='search'
           />
           <button 
             className='search-form__button'
             type='submit'
           />
-          <FilterCheckBox />
-      </form>    
+          <FilterCheckBox 
+            isShortMovies={isShortMovies}
+            onFilter={onFilter}
+          />
+      </form>
+      {error && <p className='search-form__error'>Нужно ввести ключевое слово</p>}    
     </section>
   )
 }

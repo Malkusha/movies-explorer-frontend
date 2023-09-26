@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 
-function Header({isLoggedin}) {
+function Header({isLoggedIn}) {
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -19,7 +19,7 @@ function Header({isLoggedin}) {
   return (
     <header className='header'>
       <Logo />
-      {isLoggedin ? (
+      {isLoggedIn ? (
         <>
           <nav>
             <ul className='header__film-menu header__menu'>
@@ -42,6 +42,7 @@ function Header({isLoggedin}) {
           />}
           {isOpen && <Navigation 
             onClose={handleClose}
+
           />}
         </>
          ) :

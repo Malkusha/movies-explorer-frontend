@@ -18,15 +18,32 @@
   flex-direction: column;
 }
 
+.profile__input-container {
+  position: relative;
+}
+
+.profile__label {
+  position: absolute;
+  top: 16px;
+  text-align: start;
+  font-size: 11px;
+  font-weight: 400;
+}
+
 .profile__input {
+  width: 100%;
   background-color: transparent;
+  color: #fff;
+  text-align: end;
   border: none;
+  outline: none;
   padding: 16px 0;
   font-size: 11px;
   font-weight: 400;
 }
 
 .profile__input::placeholder {
+  text-align: start;
   color: #fff;
   font-size: 11px;
   font-weight: 500;
@@ -34,6 +51,10 @@
 
 .profile__input_name {
   border-bottom: 1px #424242 solid;
+}
+
+.profile__submit {
+  margin: 206px 0 16px;
 }
 
 .profile__button {

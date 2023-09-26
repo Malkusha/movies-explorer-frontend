@@ -1,6 +1,28 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 
-function MoviesCard({movie, isSaved, onClick}) {
+function MoviesCard({
+  movie, 
+  isSaved, 
+  onMovieDelete, 
+  onMovieSave, 
+  savedMovies}) {
+
+  const location = useLocation();
+  
+  function handleMovieClick() {
+    if (isSaved) {
+      if (location.pathname === '/saved-movies') {
+        console.log(movie._id);
+        onMovieDelete(movie)
+      } else {
+        onMovieDelete(savedMovies.filter((m) => m.movieId === movie.id)[0])
+      }
+    } else {
+      onMovieSave(movie)
+    }
+  }
 
   function convertDuration(duration) {
     let h = Math.trunc(duration / 60);
@@ -10,17 +32,29 @@ function MoviesCard({movie, isSaved, onClick}) {
 
   return(
     <li className='movie'>
-      <a className='movie__link' href={movie.trailerLink }>
-        <img className='movie__image' src={movie.thumbnail} alt={movie.nameRu}/>
+      <a className='movie__link' href={movie.trailerLink} target='_blank'>
+        <img 
+        className='movie__image' 
+        src={location.pathname === '/saved-movies' ? movie.image : `https://api.nomoreparties.co/${movie.image.url}`} 
+        alt={movie.nameRU}/>
       </a>
       {isSaved ? 
         (<>
           <div className='movie__icon movie__icon_type_saved' />
-          <button className='movie__button movie__button_type_delete'/>
+          <button 
+            className='movie__button movie__button_type_delete'
+            type='button'
+            onClick={handleMovieClick}
+            aria-label='Удалить из сохраненных'
+          />
         </>) :
-        (<button className='movie__button movie__button_type_save' onClick={onClick}>Сохранить</button>)}
+        (<button 
+        className='movie__button movie__button_type_save' 
+        type='button'
+        onClick={handleMovieClick}
+        aria-label='Сохранить'>Сохранить</button>)}
       <div className='movie__info'>
-        <h2 className='movie__title'>{movie.nameRu}</h2>
+        <h2 className='movie__title'>{movie.nameRU}</h2>
         <p className='movie__time'>{convertDuration(movie.duration)}</p>
       </div>
     </li>
