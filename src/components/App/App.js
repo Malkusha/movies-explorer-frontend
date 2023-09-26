@@ -61,6 +61,10 @@ function App() {
   }
 
   useEffect(() => {
+    setRequestError(false);
+  }, [])
+
+  useEffect(() => {
     checkToken();
   }, [])
 
