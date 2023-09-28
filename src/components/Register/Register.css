@@ -1,0 +1,22 @@
+.auth__reg-label {
+  margin-bottom: 10px;
+  color: #8B8B8B;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.auth__reg-input {
+    padding: 15px;
+    margin-bottom: 18px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    background: #2F2F2F;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.auth__reg-input:focus {
+  font-weight: 500;
+}
