@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import './SavedMovies.css';
-import Preloader from '../Preloader/Preloader';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
@@ -53,6 +52,11 @@ function SavedMovies({onMovieDelete, onMovieSave, savedMovies}) {
     setFilteredMovies(savedMovies);
   }, [])
 
+  useEffect(() => {
+    setFilteredMovies(savedMovies);
+  }, [savedMovies])
+  
+  
   return (
     <main>
       <SearchForm 

@@ -5,7 +5,7 @@ import InfoToolTip from '../InfoToolTip/InfoTooltip';
 import Success from '../../images/Success.svg';
 
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-
+import { EMAIL_REGEXP } from '../../utils/constants';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
 function Profile({
@@ -14,7 +14,9 @@ function Profile({
   isOpen,
   setIsSuccessToolTipOpen,
   requestError,
-  errorText
+  setRequestError,
+  errorText,
+  isLoading
   }) {
 
   const currentUser = useContext(CurrentUserContext);
@@ -26,6 +28,7 @@ function Profile({
     addFormValues} = useFormAndValidation();
 
   const [readOnly, setReadOnly] = useState(true);
+  const [sameValue, setSameValue] = useState(true);
 
   function handleEdit() {
     setReadOnly(false);
@@ -37,10 +40,24 @@ function Profile({
   }
 
   useEffect(() => {
+    {
+      if (formValue.name === currentUser.name && formValue.email === currentUser.email) {
+        setSameValue(true);
+      } else {
+        setSameValue(false)
+      }
+    }
+  }, [formValue]) 
+
+  useEffect(() => {
     if (currentUser) {
       addFormValues(currentUser);
     }
   }, [currentUser]);
+
+  useEffect(() => {
+    setRequestError(false);
+  }, [])
 
 
   return(
@@ -58,7 +75,7 @@ function Profile({
               minLength="2"
               maxLength="40"
               required
-              value={formValue.name || ''}
+              value={formValue.name || ''} 
               onChange={handleChange}
               readOnly={readOnly}
             />
@@ -73,10 +90,12 @@ function Profile({
               id='email'
               name='email'
               type='email'
+              pattern={EMAIL_REGEXP}
               required
               value={formValue.email || ''}
               onChange={handleChange}
               readOnly={readOnly}
+              disabled={isLoading ? true : false}
             />
             <span className={!isValid ? 'auth__error auth__error_active'
           : 'auth__error'}>{error.email}</span>
@@ -92,10 +111,10 @@ function Profile({
           onClick={onLogout}>Выйти из аккаунта
         </Link>}
         {!readOnly && <button 
-          className={`profile__submit auth__submit ${!isValid ? `auth__submit_disabled` : ``}`} 
+          className={`profile__submit auth__submit ${!isValid || sameValue || isLoading ? `profile__submit_disabled` : ``}`} 
           form='form'
           type='submit'
-          disabled={!isValid ? true : false}
+          disabled={!isValid || sameValue ? true : false}
         >Сохранить</button>}
       </form>
       <p className={`auth__request-error ${requestError ? `auth__request-error_active` : ``}`}>{errorText}</p>

@@ -57,6 +57,11 @@
   margin: 206px 0 16px;
 }
 
+.profile__submit_disabled {
+  background: #F8F8F8;
+  color: #000;
+}
+
 .profile__button {
   margin: 206px 0 16px;
   background-color: transparent;

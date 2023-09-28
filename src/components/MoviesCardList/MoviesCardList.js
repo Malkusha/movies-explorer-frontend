@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
+import {WINDOW_WIDTH, MOVIES_ON_PAGE, MOVIES_ADD} from '../../utils/constants';
+
 function MoviesCardList({
   movies, 
   isNotFound, 
@@ -17,22 +19,22 @@ function MoviesCardList({
   const location = useLocation();
 
   function showMoviesOnPage() {
-    if (window.innerWidth > 768) {
-      setMoviesOnPage(12)
+    if (window.innerWidth >= WINDOW_WIDTH.desktop) {
+      setMoviesOnPage(MOVIES_ON_PAGE.desktop)
     }
-    else if (window.innerWidth <= 480) {
-      setMoviesOnPage(5)
+    else if (window.innerWidth <= WINDOW_WIDTH.mobile) {
+      setMoviesOnPage(MOVIES_ON_PAGE.mobile)
     }
     else {
-      setMoviesOnPage(8)
+      setMoviesOnPage(MOVIES_ON_PAGE.laptop)
     }
   }
 
   function handleShowMore() {
-    if (window.innerWidth >= 1280) {
-      setMoviesOnPage(moviesOnPage + 3)
+    if (window.innerWidth >= WINDOW_WIDTH.desktop) {
+      setMoviesOnPage(moviesOnPage + MOVIES_ADD.desktop)
     } else {
-      setMoviesOnPage(moviesOnPage + 2)
+      setMoviesOnPage(moviesOnPage + MOVIES_ADD.mobile)
     }
   }
 
@@ -45,12 +47,13 @@ function MoviesCardList({
 
   useEffect(() => {
     showMoviesOnPage();
-  }, []);
+  }, [movies]);
 
   useEffect(() => {
     setTimeout(() => {
       window.addEventListener('resize', showMoviesOnPage)
-    }, 1000)
+    }, 1000);
+    return () => window.removeEventListener('resize', showMoviesOnPage)
   })
 
   return(

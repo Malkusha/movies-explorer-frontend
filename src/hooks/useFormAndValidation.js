@@ -16,7 +16,7 @@ function useFormAndValidation() {
       [name]: value
     })
 
-    setIsValid(e.target.closest('#form').checkValidity());
+    setIsValid(e.target.checkValidity());
 
     setError({
       ...error,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import './App.css';
 import Header from '../Header/Header';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -14,7 +14,6 @@ import Footer from '../Footer/Footer';
 
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { 
-  ERROR_LOGIN_NO_TOKEN,
   ERROR_lOGIN_WRONG_DATA,
   ERROR_LOGIN_WRONG_TOKEN,
   ERROR_REG_EMAIL_EXIST,
@@ -26,6 +25,7 @@ import * as mainApi from '../../utils/MainApi';
 
 function App() {
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
@@ -39,7 +39,6 @@ function App() {
 
   const location = useLocation();
   const navigate = useNavigate();
-
   
   function checkToken() {
     const token = localStorage.getItem("token");
@@ -51,7 +50,7 @@ function App() {
         }
         localStorage.removeItem('allMovies');
         setIsLoggedIn(true);
-        navigate('/movies');
+        navigate(location.pathname);
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -59,10 +58,6 @@ function App() {
       });
     }
   }
-
-  useEffect(() => {
-    setRequestError(false);
-  }, [])
 
   useEffect(() => {
     checkToken();
@@ -91,6 +86,7 @@ function App() {
   }, [isLoggedIn])
 
   function handleRegister({name, email, password}) {
+    setIsLoading(true);
     mainApi.register(name, email, password)
       .then(() => {
         handleAuthorize({email, password})
@@ -101,6 +97,9 @@ function App() {
         err === 'Ошибка: 409'
           ? setErrorText(ERROR_REG_EMAIL_EXIST)
           : setErrorText(ERROR_REG)
+      })
+      .finally(() => {
+        setIsLoading(false);
       })
   }
 
@@ -118,22 +117,28 @@ function App() {
           ? setErrorText(ERROR_lOGIN_WRONG_DATA)
           : setErrorText(ERROR_LOGIN_WRONG_TOKEN); 
         console.log(err);
-      });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   }
 
   function handleUpdateUser({name, email}) {
     mainApi.setProfileInfo({name, email})
-    .then((data) => {
-      setCurrentUser(data.data);
-      handleSuccessToolTip();
-    })
-    .catch((err) => {
-      setRequestError(true);
-      err === 'Ошибка: 409'
-        ? setErrorText(ERROR_UPDATE_EMAIL_EXIST)
-        : setErrorText(ERROR_UPDATE); 
-      console.log(err)
-    });
+      .then((data) => {
+        setCurrentUser(data.data);
+        handleSuccessToolTip();
+      })
+      .catch((err) => {
+        setRequestError(true);
+        err === 'Ошибка: 409'
+          ? setErrorText(ERROR_UPDATE_EMAIL_EXIST)
+          : setErrorText(ERROR_UPDATE); 
+        console.log(err)
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   }
 
   function handleLogout() {
@@ -198,6 +203,7 @@ function App() {
           }/>
           <Route path="/profile" element={
             <ProtectedRoute
+              isLoading={isLoading}
               isLoggedIn={isLoggedIn}
               element={Profile}
               onUpdateUser={handleUpdateUser}
@@ -205,23 +211,28 @@ function App() {
               isOpen={isSuccessToolTipOpen}
               setIsSuccessToolTipOpen={setIsSuccessToolTipOpen}
               requestError={requestError}
+              setRequestError={setRequestError}
               errorText={errorText}
             />
           }
           />
           <Route 
               path="/signup" 
-              element={<Register
+              element={isLoggedIn ? <Navigate to="/" replace/> : <Register
+                isLoading={isLoading}
                 onRegister={handleRegister}
                 requestError={requestError}
+                setRequestError={setRequestError}
                 errorText={errorText}
               />}
           /> 
           <Route 
               path="/signin" 
-              element={<Login 
+              element={isLoggedIn ? <Navigate to="/" replace/> : <Login
+                isLoading={isLoading}
                 onLogin={handleAuthorize}
                 requestError={requestError}
+                setRequestError={setRequestError}
                 errorText={errorText}
               />}
           />

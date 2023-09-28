@@ -42,7 +42,7 @@
 }
 
 .movie__button_type_delete {
-  display: none;
+  display: block;
   width: 21px;
   height: 21px;
   background-image: url(../../images/del.svg);
@@ -52,10 +52,6 @@
   width: 21px;
   height: 21px;
   background-image: url(../../images/saved.svg);
-}
-
-.movie:hover .movie__button_type_delete {
-  display: block;
 }
 
 .movie__container:hover .movie__icon_type_saved {

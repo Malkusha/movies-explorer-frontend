@@ -91,7 +91,8 @@ function Movies({onMovieDelete, onMovieSave, savedMovies}) {
 
   useEffect(() => {
     if (localStorage.getItem('searchQuery')) {
-      filteredMovies.length === 0 
+      const movies = JSON.parse(localStorage.getItem('movies'));
+      movies.length === 0 
         ? setIsNotFound(true)
         : setIsNotFound(false)
     } else setIsNotFound(false)  

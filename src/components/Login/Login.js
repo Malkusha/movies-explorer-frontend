@@ -2,7 +2,7 @@ import LoginForm from '../LoginForm/LoginForm';
 import './Login.css';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function Login ({onLogin, requestError, errorText}) {
+function Login ({onLogin, requestError, setRequestError, errorText, isLoading}) {
 
   const {
     formValue,
@@ -23,12 +23,14 @@ function Login ({onLogin, requestError, errorText}) {
         redirectText='Ещё не зарегистрированы? '
         buttonText='Войти'
         linkText='Регистрация'
+        isLoading={isLoading}
         onSubmit={handleSubmit}
         onChange={handleChange}
         formValue={formValue}
         isDisabled={!isValid}
         error={error}
         requestError={requestError}
+        setRequestError={setRequestError}
         errorText={errorText}
       />
     </main>

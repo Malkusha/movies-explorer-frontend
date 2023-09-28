@@ -4,6 +4,7 @@ import FilterCheckBox from '../FilterCheckbox/FilterCheckbox';
 
 
 function SearchForm({
+  isLoading,
   onSearchMovies, 
   isShortMovies, 
   onFilter, 
@@ -44,6 +45,7 @@ function SearchForm({
             type='text'
             id='search'
             name='search'
+            disabled={isLoading ? true : false}
           />
           <button 
             className='search-form__button'
@@ -52,6 +54,7 @@ function SearchForm({
           <FilterCheckBox 
             isShortMovies={isShortMovies}
             onFilter={onFilter}
+            isLoading={isLoading}
           />
       </form>
       {error && <p className='search-form__error'>Нужно ввести ключевое слово</p>}    

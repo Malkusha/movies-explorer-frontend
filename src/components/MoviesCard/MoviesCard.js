@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 
@@ -12,16 +11,9 @@ function MoviesCard({
   const location = useLocation();
   
   function handleMovieClick() {
-    if (isSaved) {
-      if (location.pathname === '/saved-movies') {
-        console.log(movie._id);
-        onMovieDelete(movie)
-      } else {
-        onMovieDelete(savedMovies.filter((m) => m.movieId === movie.id)[0])
-      }
-    } else {
-      onMovieSave(movie)
-    }
+    isSaved 
+      ? onMovieDelete(savedMovies.filter((m) => m.movieId === movie.movieId)[0])
+      : onMovieSave(movie)
   }
 
   function convertDuration(duration) {
@@ -41,12 +33,12 @@ function MoviesCard({
       {isSaved ? 
         (<>
           <div className='movie__icon movie__icon_type_saved' />
-          <button 
+          {location.pathname === '/saved-movies' && <button 
             className='movie__button movie__button_type_delete'
             type='button'
             onClick={handleMovieClick}
             aria-label='Удалить из сохраненных'
-          />
+          />}
         </>) :
         (<button 
         className='movie__button movie__button_type_save' 

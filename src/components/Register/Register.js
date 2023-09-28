@@ -3,7 +3,7 @@ import LoginForm from '../LoginForm/LoginForm';
 
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function Register({onRegister, requestError, errorText}) {
+function Register({onRegister, requestError, setRequestError, errorText, isLoading}) {
 
   const {
     formValue,
@@ -24,12 +24,14 @@ function Register({onRegister, requestError, errorText}) {
         buttonText='Зарегистрироваться'
         redirectText='Уже зарегистрированы? '
         linkText='Войти'
+        isLoading={isLoading}
         onSubmit={handleSubmit}
         onChange={handleChange}
         formValue={formValue}
         error={error}
         isDisabled={!isValid}
         requestError={requestError}
+        setRequestError={setRequestError}
         errorText={errorText}
       >
         <label className='auth__reg-label'>Имя</label>
@@ -43,6 +45,7 @@ function Register({onRegister, requestError, errorText}) {
           value={formValue.name || ''}
           required
           onChange={handleChange}
+          disabled={isLoading ? true : false}
         />
         <span className={!isValid ? 'auth__error auth__error_active'
           : 'form__error'}>{error.name}</span>
